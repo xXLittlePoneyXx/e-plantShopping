@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
-import addItem from './CartSlice';
+import { addItem } from './CartSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
@@ -9,8 +10,10 @@ function ProductList() {
 
     const [addedToCart, setAddedToCart] = useState({});
 
+    const dispatch = useDispatch();
+
     const handleAddToCart = (product) => {
-        dispatch(addItem(product));
+        dispatch(addItem({product}));
         setAddedToCart((prevState) => ({
             ...prevState,
             [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
@@ -286,9 +289,10 @@ const handlePlantsClick = (e) => {
                 <div className="product-list">
                     {category.plants.map((plant, plantIndex) => (
                     <div className="product-card" key={plantIndex}>
-                        <img className="product-image" src={plant.image} alt={plant.name} />
                         <div className="product-title">{plant.name}</div>
-                        {/*Similarly like the above plant.name show other details like description and cost*/}
+                        <img className="product-image" src={plant.image} alt={plant.name} />
+                        <div>{plant.cost}</div>
+                        <div>{plant.description}</div>
                         <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                     </div>
                     ))}
