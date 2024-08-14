@@ -25,14 +25,16 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleIncrement = (item) => {
-    dispatch(updateQuantity(item));
+    const newQuantity = item.quantity + 1;
+    dispatch(updateQuantity({name: item.name, quantity: newQuantity}));
   };
 
   const handleDecrement = (item) => {
     if (item.quantity <= 1) {
         dispatch(removeItem(item));
     } else {
-        dispatch(updateQuantity(item));
+        const newQuantity = item.quantity - 1;
+        dispatch(updateQuantity({name: item.name, quantity: newQuantity}));
     }
   };
 
