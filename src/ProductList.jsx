@@ -10,7 +10,12 @@ function ProductList() {
 
     const [addedToCart, setAddedToCart] = useState({});
 
-    const cartSize = useSelector(state => state.cart.itemsCount);
+    const cart = useSelector(state => state.cart.items);
+    let cartSize = 0;
+    cart.forEach((item) => {
+        cartSize += item.quantity;
+    })
+
     const dispatch = useDispatch();
 
     const handleAddToCart = (product) => {
@@ -295,7 +300,7 @@ const handlePlantsClick = (e) => {
                         <img className="product-image" src={plant.image} alt={plant.name} />
                         <div>${plant.cost}</div>
                         <div>{plant.description}</div>
-                        <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                        <button  className="product-button" onClick={() => handleAddToCart(plant)} disabled={(plant.name in addedToCart? true: false)}>Add to Cart</button>
                     </div>
                     ))}
                 </div>
