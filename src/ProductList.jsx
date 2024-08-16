@@ -128,7 +128,7 @@ function ProductList() {
                     name: "Geraniums",
                     image: "https://cdn.pixabay.com/photo/2012/04/26/21/51/flowerpot-43270_1280.jpg",
                     description: "Known for their insect-repelling properties while adding a pleasant scent.",
-                    cost: "$20"
+                    cost: 20
                 },
                 {
                     name: "Basil",
